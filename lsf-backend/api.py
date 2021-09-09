@@ -13,9 +13,9 @@ reddit = praw.Reddit(
 
 @app.route('/api', methods=['GET'])
 def api():
-    streamerDict, categoryDict, dramaCount = lsf.sortLinkFlairs()
+    streamerDict, categoryDict, dramaCount, dramaList = lsf.sortLinkFlairs()
     urlList = lsf.embedClips()
 
-    data = [streamerDict, categoryDict, dramaCount, urlList]
+    data = [streamerDict, categoryDict, dramaCount, urlList, dramaList]
 
     return jsonify({'data' : data})

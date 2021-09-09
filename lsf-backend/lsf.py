@@ -14,6 +14,7 @@ def sortLinkFlairs(): #returns two dictionaries, one for streamers and one for c
     streamerDict = {}
     categoryDict = {}
     dramaCount = 0
+    dramaArr = []
     for post in topOfMonth:
         streamer = ""
         category = ""
@@ -25,6 +26,7 @@ def sortLinkFlairs(): #returns two dictionaries, one for streamers and one for c
             continue
         if "Drama" in post.link_flair_text: # keep track of drama posts
             dramaCount += 1
+            dramaArr.append(post.title)
         if ":" not in post.link_flair_text:
             continue
         flair = (re.sub(r'\:.*?\:', '', post.link_flair_text)).lstrip() #gets rid of :twitch: or :twitter:
@@ -42,12 +44,13 @@ def sortLinkFlairs(): #returns two dictionaries, one for streamers and one for c
             streamerDict[streamer] += 1
         else:
             streamerDict[streamer] = 1
-    return (streamerDict, categoryDict, dramaCount)
+    return (streamerDict, categoryDict, dramaCount, dramaArr)
     
 def embedClips(): #return top 3 clips of the month urls so it can be embeded in react
     topOfMonth = reddit.subreddit("LivestreamFail").top("month")
     top3 = []
     for post in topOfMonth:
-        top3.append(post.url)
+        if "twitch" in post.url:
+            top3.append(post.url)
     return [top3[0], top3[1], top3[2]]
 
