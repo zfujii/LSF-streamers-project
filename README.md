@@ -1,4 +1,4 @@
-# LSF Popularity Metric 
+# LSF Popularity Metrics
 Create praw_info.py with reddit information in lsf-backend <br />
 scrapes information from the subreddit LiveStreamFails using the PRAW API <br />
 keeps track of the popular streamers and categories by number of clips that are in top of the month <br />
